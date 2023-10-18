@@ -23,3 +23,5 @@ while IFS= read -r ip; do
     # Crear una línea en el archivo CSV con los resultados
     echo "$ip,$ssh_result,$samba_result,$rdp_result" >> "$output_csv"
 done < "ONLINE.txt"
+
+awk 'BEGIN {FS=OFS=","} {for (i=2; i<=4; i++) {gsub("0", "Cerrado", $i); gsub("1", "Abierto", $i);} print}' resultado.csv > fnd.csv
