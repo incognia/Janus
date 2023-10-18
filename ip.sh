@@ -1,18 +1,38 @@
-# Solicita los primeros tres octetos
-primeros_tres_octetos = input("Ingresa los primeros tres octetos (Ejemplo: 192.168.1): ")
+#!/bin/bash
 
-# Solicita el primer valor del rango del último octeto
-primer_valor = int(input("Ingresa el primer valor del rango del último octeto: "))
+# Solicitar los tres primeros octetos
+read -p "Ingresa los tres primeros octetos (ejemplo: 192.168.1): " primeros_tres_octetos
 
-# Solicita el último valor del rango del último octeto
-ultimo_valor = int(input("Ingresa el último valor del rango del último octeto: "))
+# Solicitar el primer valor del rango para el cuarto octeto
+read -p "Ingresa el primer valor del rango para el cuarto octeto o presiona 'f' para el rango completo (0-255): " rango_inicio
 
-# Validación de los valores del rango
-if 0 <= primer_valor <= 255 and 0 <= ultimo_valor <= 255 and primer_valor <= ultimo_valor:
-    with open("IP.txt", "w") as archivo:
-        for i in range(primer_valor, ultimo_valor + 1):
-            ip = f"{primeros_tres_octetos}.{i}\n"
-            archivo.write(ip)
-    print(f"Se ha creado el archivo 'IP.txt' con las direcciones IP en el rango especificado.")
-else:
-    print("Los valores del rango del último octeto son inválidos.")
+# Verificar si se seleccionó el rango completo
+if [ "$rango_inicio" == "f" ]; then
+    rango_inicio=0
+    rango_fin=255
+else
+    # Solicitar el último valor del rango para el cuarto octeto
+    read -p "Ingresa el último valor del rango para el cuarto octeto: " rango_fin
+
+    # Verificar que el rango sea válido (de 0 a 255)
+    if (( rango_inicio < 0 )) || (( rango_inicio > 255 )) || (( rango_fin < 0 )) || (( rango_fin > 255 )) || (( rango_inicio > rango_fin )); then
+        echo "Rango no válido. Debe ser de 0 a 255 y el primer valor debe ser menor o igual al último."
+        exit 1
+    fi
+fi
+
+# Crear el archivo IP.txt
+archivo="IP.txt"
+
+# Eliminar el archivo si existe previamente
+if [ -e "$archivo" ]; then
+    rm "$archivo"
+fi
+
+# Generar las combinaciones de IP y guardarlas en el archivo
+for ((octeto4 = rango_inicio; octeto4 <= rango_fin; octeto4++)); do
+    ip="$primeros_tres_octetos.$octeto4"
+    echo "$ip" >> "$archivo"
+done
+
+echo "Se han generado las IP y se han guardado en $archivo."
