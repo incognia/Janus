@@ -1,4 +1,4 @@
-# SecOps
+# Janus
 
 ![SecOps Logo](logo.png)
 
