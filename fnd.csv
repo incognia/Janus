@@ -1,11 +1,10 @@
 IP,SSH,SAMBA,RDP
-200.10.1.16,Abierto,Abierto,Abierto
+200.10.1.14,Abierto,Abierto,Abierto
 200.10.1.26,Abierto,Abierto,Abierto
 200.10.1.59,Abierto,Abierto,Abierto
 200.10.1.68,Cerrado,Cerrado,Abierto
 200.10.1.69,Cerrado,Cerrado,Abierto
 200.10.1.71,Abierto,Abierto,Cerrado
-200.10.1.78,Abierto,Abierto,Abierto
 200.10.1.86,Abierto,Abierto,Abierto
 200.10.1.89,Cerrado,Abierto,Abierto
 200.10.1.105,Abierto,Cerrado,Cerrado
@@ -15,5 +14,4 @@ IP,SSH,SAMBA,RDP
 200.10.1.135,Abierto,Cerrado,Cerrado
 200.10.1.140,Abierto,Cerrado,Cerrado
 200.10.1.141,Abierto,Cerrado,Cerrado
-200.10.1.167,Abierto,Abierto,Abierto
 200.10.1.192,Abierto,Abierto,Abierto
